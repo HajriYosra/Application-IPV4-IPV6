@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IP Address Application</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 35px 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #10172a, #253b63);
+            color: white;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #bdc9dc;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            color: #172033;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px #0003;
+        }
+
+        h2 {
+            color: #3156a5;
+            margin-top: 0;
+        }
+
+        .item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+            overflow-wrap: anywhere;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .value {
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .refresh {
+            display: block;
+            width: fit-content;
+            margin: 25px auto;
+            padding: 13px 25px;
+            border-radius: 8px;
+            background: #6688ee;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .refresh:hover {
+            background: #4969cc;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #a32222;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            color: #bdc9dc;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>IP Address Application</h1>
+
+    <p class="subtitle">
+        IPv4, IPv6 and Network Information
+    </p>
+
+    <div class="card">
+
+        <h2>IP Addresses</h2>
+
+        <div class="item">
+            IPv4 Address:
+            <span class="value">{{ info.ipv4 }}</span>
+        </div>
+
+        <div class="item">
+            IPv6 Address:
+            <span class="value">{{ info.ipv6 }}</span>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Location and Network</h2>
+
+        {% if success %}
+
+            {% for key, value in info.details.items() %}
+
+                <div class="item">
+                    {{ key.replace("_", " ").title() }}:
+                    <span class="value">{{ value }}</span>
+                </div>
+
+            {% endfor %}
+
+            <p style="color: #777; font-size: 13px;">
+                Location information is approximate and based on IP address.
+            </p>
+
+        {% else %}
+
+            <p class="error">
+                {{ info.error_message }}
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <a href="/" class="refresh">Refresh Information</a>
+
+    <footer>
+        Python OOP | REST API | JSON | Flask
+    </footer>
+
+</div>
+
+</body>
+</html>
